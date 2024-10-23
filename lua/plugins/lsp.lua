@@ -73,7 +73,7 @@ return {
             },
         }
 
-        lspconfig.tsserver.setup {
+        lspconfig.ts_ls.setup {
             -- capabilities = lsp_capabilities,
             filetypes = {
                 "javascript",
@@ -97,14 +97,16 @@ return {
         -- servers we always want installed
         local ensure_installed = {
             "lua_ls",
-            "tsserver",
+            "ts_ls",
             "html",
             "cssls",
+            "clangd",
             "tailwindcss",
             "emmet_ls",
             "rust_analyzer",
             "gopls",
             "csharp_ls",
+            "zls",
         }
 
         -- Here is where we manage the installation of language servers
@@ -145,11 +147,11 @@ return {
                 opts.desc = "Open diagnostic float"
                 vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
 
-                opts.desc = "Go to next diagnostic"
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-
-                opts.desc = "Go to previous diagnostic"
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+                -- opts.desc = "Go to next diagnostic"
+                -- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+                --
+                -- opts.desc = "Go to previous diagnostic"
+                -- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 
                 opts.desc = "Code action"
                 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
