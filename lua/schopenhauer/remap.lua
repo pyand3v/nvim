@@ -14,7 +14,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("v", "d", '"+d')
 vim.keymap.set("v", "y", '"+y')
-vim.keymap.set("v", "p", '"+p')
+vim.keymap.set("n", "p", '"+p')
 
 vim.keymap.set("n", "<A-h>", "<C-w>h")
 vim.keymap.set("n", "<A-j>", "<C-w>j")

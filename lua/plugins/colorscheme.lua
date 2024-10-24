@@ -22,6 +22,7 @@ return {
             require("tokyonight").setup{
                 transparent = true, -- Set transparent background.
             }
+            vim.cmd([[colorscheme tokyonight]])
         end,
     },
     {
@@ -32,7 +33,6 @@ return {
             require('nordic').setup {
             transparent_bg = true,
             }
-            vim.cmd([[colorscheme nordic]])
         end
     }
 }
