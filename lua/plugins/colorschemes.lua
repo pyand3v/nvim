@@ -37,9 +37,14 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require('nordic').setup {
+            require('nordic').setup({
                 transparent_bg = true,
-            }
+                transparent_background = true,
+                transparent = {
+                    bg = false,
+                    float = false,
+                },
+            })
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
             vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
