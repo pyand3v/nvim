@@ -13,7 +13,7 @@ return {
             }
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end,
     },
@@ -28,7 +28,7 @@ return {
             }
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end,
     },
@@ -42,7 +42,7 @@ return {
             }
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     },
@@ -56,7 +56,7 @@ return {
             })
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     },
@@ -70,7 +70,7 @@ return {
             })
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     },
@@ -80,19 +80,17 @@ return {
             vim.g.nord_transparent = true
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     },
     {
         "Mofiqul/dracula.nvim",
         config = function()
-            require('dracula').setup({
-                transparent_bg = true,
-            })
+            require('dracula').setup()
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     },
@@ -106,7 +104,7 @@ return {
             })
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             vim.api.nvim_set_hl(0, "Float", { bg = "none" })
         end
     }
