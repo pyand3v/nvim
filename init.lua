@@ -1,2 +1,2 @@
 require("schopenhauer")
-require("lua.colorscheme")
+require("colorscheme")
