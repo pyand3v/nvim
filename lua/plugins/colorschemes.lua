@@ -82,7 +82,11 @@ return {
     {
         'shaunsingh/nord.nvim',
         config = function()
-            vim.g.nord_transparent = true
+            require("nord").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                transparent = true,
+            })
             -- Set transparency for all groups
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
             vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
