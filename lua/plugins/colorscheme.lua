@@ -11,6 +11,7 @@ return {
                 mode = "normal", -- Intensity of the palette: normal, bright, desaturate, or dark. Notice that dark is ugly!
                 aggressive_spell = false, -- Display colors for spell check.
             }
+            -- vim.cmd([[colorscheme flow]])
         end,
     },
     {
@@ -22,7 +23,7 @@ return {
             require("tokyonight").setup{
                 transparent = true, -- Set transparent background.
             }
-            vim.cmd([[colorscheme tokyonight]])
+            -- vim.cmd([[colorscheme tokyonight]])
         end,
     },
     {
@@ -33,6 +34,7 @@ return {
             require('nordic').setup {
             transparent_bg = true,
             }
+            vim.cmd([[colorscheme nordic]])
         end
     }
 }

@@ -94,6 +94,15 @@ return {
             },
         }
 
+        lspconfig.gopls.setup {
+            filetypes = {
+                "go",
+                "gomod",
+                "gowork",
+                "gotmpl",
+            }
+        }
+
         -- servers we always want installed
         local ensure_installed = {
             "lua_ls",
@@ -104,9 +113,9 @@ return {
             "tailwindcss",
             "emmet_ls",
             "rust_analyzer",
-            "gopls",
             "csharp_ls",
             "zls",
+            "gopls",
         }
 
         -- Here is where we manage the installation of language servers
@@ -119,6 +128,7 @@ return {
         require("mason-tool-installer").setup {
             ensure_installed = {
                 "prettier",
+                "delve",
             },
             run_on_start = true,
         }
