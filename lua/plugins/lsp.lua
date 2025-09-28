@@ -59,10 +59,10 @@ return {
                 },
             },
         }
-        local lspconfig = require "lspconfig"
-        -- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local lspconfig = vim.lsp.config
+        local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        lspconfig.lua_ls.setup {
+        lspconfig("lua_ls", {
             -- capabilities = lsp_capabilities,
             settings = {
                 Lua = {
@@ -71,16 +71,17 @@ return {
                     },
                 },
             },
-        }
+        })
 
-        lspconfig.ts_ls.setup {
-            -- capabilities = lsp_capabilities,
+        lspconfig("ts_ls", {
+            capabilities = lsp_capabilities,
             filetypes = {
                 "javascript",
                 "typescript",
             },
-        }
-        lspconfig.emmet_ls.setup {
+        })
+
+        lspconfig("emmet_ls", {
             -- capabilities = capabilities,
             filetypes = {
                 "html",
@@ -92,16 +93,16 @@ return {
                 "less",
                 "svelte",
             },
-        }
+        })
 
-        lspconfig.gopls.setup {
+        lspconfig("gopls", {
             filetypes = {
                 "go",
                 "gomod",
                 "gowork",
                 "gotmpl",
             }
-        }
+        })
 
         -- servers we always want installed
         local ensure_installed = {
@@ -113,7 +114,7 @@ return {
             "tailwindcss",
             "emmet_ls",
             "rust_analyzer",
-            "csharp_ls",
+            -- "csharp_ls",
             "zls",
             "gopls",
         }
@@ -122,7 +123,7 @@ return {
         require("mason-lspconfig").setup {
             ensure_installed = ensure_installed,
             -- handlers = handlers,
-            automatic_installation = true,
+            -- automatic_installation = true,
         }
 
         require("mason-tool-installer").setup {
