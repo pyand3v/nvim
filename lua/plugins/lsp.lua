@@ -122,14 +122,22 @@ return {
         -- Here is where we manage the installation of language servers
         require("mason-lspconfig").setup {
             ensure_installed = ensure_installed,
+            automatic_enable = {
+                -- luau-lsp.nvim starts and configures its own Luau client.
+                exclude = { "luau_lsp" },
+            },
             -- handlers = handlers,
             -- automatic_installation = true,
         }
 
         require("mason-tool-installer").setup {
             ensure_installed = {
+                "stylua",
+                "selene",
                 "prettier",
                 "delve",
+                -- luau-lsp.nvim manages this server after Mason installs it.
+                "luau-lsp",
             },
             run_on_start = true,
         }

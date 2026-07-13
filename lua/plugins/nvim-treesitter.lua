@@ -40,7 +40,6 @@ return {
                 "gosum",
                 "rust",
                 "solidity",
-                "bash",
                 "dockerfile",
             },
             incremental_selection = {

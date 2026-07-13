@@ -1,5 +1,7 @@
+-- Keep the same block cursor in every mode.
 vim.opt.guicursor = ""
 
+-- Line numbers and indentation.
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -9,14 +11,15 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
-
 vim.opt.wrap = false
 
+-- Persist undo history, but never create swap or backup files.
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- Search feedback and UI responsiveness.
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 

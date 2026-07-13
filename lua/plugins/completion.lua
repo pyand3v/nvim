@@ -4,8 +4,8 @@ return {
     event = "InsertEnter",
     dependencies = {
         -- Sources
-        "hrsh7th/cmp-buffer", --text in current buffer
-        "hrsh7th/cmp-path", -- file system paths
+        "hrsh7th/cmp-buffer", -- Words from the current buffer.
+        "hrsh7th/cmp-path", -- Filesystem paths.
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
 
@@ -27,13 +27,13 @@ return {
         local lspkind = require "lspkind"
         local luasnip = require "luasnip"
 
-        -- Add parenthesis after completion of method or function.
+        -- Insert matching parentheses after completing a callable item.
         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
         require("luasnip.loaders.from_vscode").lazy_load()
 
-        -- https://github.com/mrcjkb/nvim/blob/master/nvim/plugin/completion.lua
+        -- Start completion only when the cursor follows a non-whitespace character.
         local function has_words_before()
             local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
             return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
@@ -46,15 +46,13 @@ return {
             { name = "buffer", max_item_count = 5 },
             { name = "path", max_item_count = 5 },
             { name = "nvim_lsp_signature_help" },
-            -- { name = "crates" },
         }
 
-        -- when moving across possible autocompletions they are not
-        -- inserted in the code until selected.
+        -- Selecting an item only highlights it until it is confirmed.
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         cmp.setup {
 
-            -- use LuaSnip to expand the snippets in the editor.
+            -- Delegate snippet expansion to LuaSnip.
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -65,7 +63,7 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             formatting = {
-                expandable_indicator = true, -- use ~ after snippets to expand
+                expandable_indicator = true,
                 format = lspkind.cmp_format {
                     mode = "text",
                     with_text = true,
@@ -82,23 +80,21 @@ return {
                 },
             },
             mapping = {
-                -- `i` = insert mode, `c` = command mode, `s` = select mode
-                -- fallback: it is used just because suggested by the doc.
-
-                -- Scroll documentations
+                -- Insert, command, and select mode mappings.
+                -- Scroll completion documentation.
                 ["<C-b>"] = cmp.mapping.scroll_docs(4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(-4),
 
-                -- Simple movement in completion
+                -- Move through completion candidates.
                 ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
 
-                -- Confirm selection
+                -- Confirm or close the completion menu.
                 ["<C-y>"] = cmp.mapping.confirm { select = true },
                 ["<CR>"] = cmp.mapping.confirm { select = true },
                 ["<C-q>"] = cmp.mapping.close(),
 
-                -- Multipurpose mappings
+                -- Prefer completion, then snippet navigation, then normal editing.
                 ["<C-n>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -113,7 +109,7 @@ return {
                 ["<C-p>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then -- jump to previous position is snippet
+                    elseif luasnip.jumpable(-1) then
                         luasnip.jump(-1)
                     else
                         fallback()
@@ -122,11 +118,7 @@ return {
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     local col = vim.fn.col "." - 1
                     if cmp.visible() then
-                        -- if #cmp.get_entries() == 1 then -- if only one entry, confirm it
                         cmp.confirm { select = true }
-                        -- else
-                        --   cmp.select_next_item()
-                        -- end
                     elseif col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
                         fallback()
                     else
