@@ -10,9 +10,9 @@ return {
     },
     config = function()
         ---@diagnostic disable-next-line: missing-fields
-        local options = require "nvim-treesitter.configs"
+        local options = require("nvim-treesitter.configs")
 
-        options.setup {
+        options.setup({
             highlight = { enable = true },
             autoinstall = true,
             indent = { enable = true },
@@ -50,6 +50,6 @@ return {
                     scope_incremental = false,
                 },
             },
-        }
+        })
     end,
 }

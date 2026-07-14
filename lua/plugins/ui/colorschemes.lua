@@ -5,12 +5,12 @@ return {
         priority = 1000,
         opts = {},
         config = function()
-            require("flow").setup {
+            require("flow").setup({
                 transparent = true,
                 fluo_color = "pink",
                 mode = "normal",
                 aggressive_spell = false,
-            }
+            })
         end,
     },
     {
@@ -19,9 +19,9 @@ return {
         priority = 1000,
         opts = { style = "storm" },
         config = function()
-            require("tokyonight").setup {
+            require("tokyonight").setup({
                 transparent = true,
-            }
+            })
         end,
     },
     {
@@ -46,7 +46,7 @@ return {
                 dark_variant = "main",
                 disable_background = true,
             })
-        end
+        end,
     },
     {
         "catppuccin/nvim",
@@ -56,20 +56,20 @@ return {
             require("catppuccin").setup({
                 transparent_background = true,
             })
-        end
+        end,
     },
     {
         "shaunsingh/nord.nvim",
         config = function()
             vim.g.nord_disable_background = true
             vim.g.nord_uniform_diff_background = false
-        end
+        end,
     },
     {
         "Mofiqul/dracula.nvim",
         config = function()
             require("dracula").setup()
-        end
+        end,
     },
     {
         "scottmckendry/cyberdream.nvim",
@@ -79,6 +79,6 @@ return {
             require("cyberdream").setup({
                 transparent_background = true,
             })
-        end
-    }
+        end,
+    },
 }

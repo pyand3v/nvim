@@ -3,7 +3,7 @@ return {
     name = "Lualine",
     enabled = true,
     config = function()
-        require("lualine").setup {
+        require("lualine").setup({
             options = {
                 icons_enabled = false,
                 theme = vim.g.colors_name,
@@ -37,6 +37,6 @@ return {
             winbar = {},
             inactive_winbar = {},
             extensions = {},
-        }
+        })
     end,
 }

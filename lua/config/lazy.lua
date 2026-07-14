@@ -19,7 +19,10 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins live in lua/plugins and are discovered through this import.
 require("lazy").setup({
     spec = {
-        { import = "plugins" },
+        { import = "plugins.ui" },
+        { import = "plugins.navigation" },
+        { import = "plugins.editing" },
+        { import = "plugins.coding" },
     },
     -- Check for plugin updates in the background.
     checker = { enabled = true },

@@ -1,16 +1,16 @@
 return {
     {
-        'goolord/alpha-nvim',
+        "goolord/alpha-nvim",
         dependencies = {
-            'nvim-tree/nvim-web-devicons',
-            'nvim-lua/plenary.nvim'
+            "nvim-tree/nvim-web-devicons",
+            "nvim-lua/plenary.nvim",
         },
         config = function()
-            local alpha = require('alpha')
-            local dashboard = require('alpha.themes.dashboard')
+            local alpha = require("alpha")
+            local dashboard = require("alpha.themes.dashboard")
             local v = vim.version()
-            local datetime = os.date " %a %d-%m-%Y   %H:%M:%S"
-            local platform = vim.fn.has "win32" == 1 and "" or ""
+            local datetime = os.date(" %a %d-%m-%Y   %H:%M:%S")
+            local platform = vim.fn.has("win32") == 1 and "" or ""
             local header_info = string.format("🚀 %s %d.%d.%d  %s", platform, v.major, v.minor, v.patch, datetime)
 
             dashboard.section.header.val = {
@@ -50,7 +50,8 @@ return {
                 dashboard.button("q", "🛟 > Quit Neovim", ":qa<CR>"),
             }
 
-            dashboard.section.footer.val = "The computing scientist’s main challenge is not to get confused by the complexities of his own making.\n- Edsger W. Dijkstra"
+            dashboard.section.footer.val =
+                "The computing scientist’s main challenge is not to get confused by the complexities of his own making.\n- Edsger W. Dijkstra"
 
             dashboard.section.footer.opts.hl = "Type"
             dashboard.section.header.opts.hl = "Include"
@@ -58,6 +59,6 @@ return {
 
             dashboard.opts.opts.noautocmd = true
             alpha.setup(dashboard.opts)
-        end
-    }
+        end,
+    },
 }

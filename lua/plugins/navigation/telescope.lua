@@ -8,12 +8,64 @@ return {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         "folke/todo-comments.nvim",
     },
+    keys = {
+        {
+            "<leader>pf",
+            function()
+                require("telescope.builtin").find_files()
+            end,
+            desc = "Find files in cwd",
+        },
+        {
+            "<leader>gf",
+            function()
+                require("telescope.builtin").git_files()
+            end,
+            desc = "Find git files",
+        },
+        {
+            "<leader>ps",
+            function()
+                require("telescope.builtin").live_grep()
+            end,
+            desc = "Find string in cwd",
+        },
+        {
+            "<leader>of",
+            function()
+                require("telescope.builtin").oldfiles()
+            end,
+            desc = "Find old files",
+        },
+        {
+            "<leader>lr",
+            function()
+                require("telescope.builtin").lsp_references()
+            end,
+            desc = "Find LSP references",
+        },
+        {
+            "<leader>ls",
+            function()
+                require("telescope.builtin").lsp_document_symbols()
+            end,
+            desc = "Find LSP symbols in current file",
+        },
+        {
+            "<leader>li",
+            function()
+                require("telescope.builtin").lsp_implementations()
+            end,
+            desc = "Find LSP implementations",
+        },
+        { "<leader>th", "<cmd>Telescope themes<cr>", desc = "Theme switcher" },
+    },
     config = function()
-        local telescope = require "telescope"
-        local actions = require "telescope.actions"
-        telescope.load_extension "fzf"
+        local telescope = require("telescope")
+        local actions = require("telescope.actions")
+        telescope.load_extension("fzf")
 
-        telescope.setup {
+        telescope.setup({
             defaults = {
                 layout_strategy = "vertical",
                 path_display = { "full" },
@@ -42,17 +94,17 @@ return {
                     enable_live_preview = true,
                     light_themes = {
                         ignore = true,
-                        keywords = { "light", "day", "frappe" }
+                        keywords = { "light", "day", "frappe" },
                     },
 
                     dark_themes = {
                         ignore = false,
-                        keywords = { "dark", "night", "black" }
+                        keywords = { "dark", "night", "black" },
                     },
 
                     persist = {
                         enabled = true,
-                        path = vim.fn.stdpath("config") .. "/lua/colorscheme.lua"
+                        path = vim.fn.stdpath("config") .. "/lua/config/theme.lua",
                     },
                     mappings = {
                         down = "<C-n>",
@@ -108,17 +160,6 @@ return {
                     disable_devicons = true,
                 },
             },
-        }
-
-        local builtin = require "telescope.builtin"
-
-        vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Find files in cwd" })
-        vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Find git files" })
-        vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = "Find string in cwd" })
-        vim.keymap.set("n", "<leader>of", builtin.oldfiles, { desc = "Find old files" })
-        vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "Find lsp references" })
-        vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Find lsp symbols in the current file" })
-        vim.keymap.set("n", "<leader>li", builtin.lsp_implementations, { desc = "Find LSP implementations" })
-        vim.keymap.set("n", "<leader>th", ":Telescope themes<CR>", { noremap = true, silent = true, desc = "Theme switcher" })
+        })
     end,
 }

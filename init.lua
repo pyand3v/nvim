@@ -1,3 +1,3 @@
--- Load editor settings and plugins before applying the persisted colorscheme.
-require("schopenhauer")
-require("colorscheme")
+-- Load core configuration before applying the persisted colorscheme.
+require("config")
+require("config.theme")

@@ -8,6 +8,7 @@ return {
         "hrsh7th/cmp-path", -- Filesystem paths.
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
 
         -- Snippets
         "L3MON4D3/LuaSnip",
@@ -20,15 +21,15 @@ return {
     config = function()
         local cmp_status_ok, cmp = pcall(require, "cmp")
         if not cmp_status_ok then
-            vim.api.nvim_err_writeln "CMP module not found or failed to load"
+            vim.api.nvim_err_writeln("CMP module not found or failed to load")
             return
         end
 
-        local lspkind = require "lspkind"
-        local luasnip = require "luasnip"
+        local lspkind = require("lspkind")
+        local luasnip = require("luasnip")
 
         -- Insert matching parentheses after completing a callable item.
-        local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
         require("luasnip.loaders.from_vscode").lazy_load()
@@ -36,7 +37,7 @@ return {
         -- Start completion only when the cursor follows a non-whitespace character.
         local function has_words_before()
             local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
         end
 
         local sources = {
@@ -50,7 +51,7 @@ return {
 
         -- Selecting an item only highlights it until it is confirmed.
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
-        cmp.setup {
+        cmp.setup({
 
             -- Delegate snippet expansion to LuaSnip.
             snippet = {
@@ -64,7 +65,7 @@ return {
             },
             formatting = {
                 expandable_indicator = true,
-                format = lspkind.cmp_format {
+                format = lspkind.cmp_format({
                     mode = "text",
                     with_text = true,
                     maxwidth = 50,
@@ -77,7 +78,7 @@ return {
                         path = "[PATH]",
                         nvim_lsp_signature_help = "[SIG]",
                     },
-                },
+                }),
             },
             mapping = {
                 -- Insert, command, and select mode mappings.
@@ -90,8 +91,8 @@ return {
                 ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
 
                 -- Confirm or close the completion menu.
-                ["<C-y>"] = cmp.mapping.confirm { select = true },
-                ["<CR>"] = cmp.mapping.confirm { select = true },
+                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-q>"] = cmp.mapping.close(),
 
                 -- Prefer completion, then snippet navigation, then normal editing.
@@ -116,10 +117,10 @@ return {
                     end
                 end, { "i", "c", "s" }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
-                    local col = vim.fn.col "." - 1
+                    local col = vim.fn.col(".") - 1
                     if cmp.visible() then
-                        cmp.confirm { select = true }
-                    elseif col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
+                        cmp.confirm({ select = true })
+                    elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
                         fallback()
                     else
                         cmp.complete()
@@ -134,6 +135,6 @@ return {
                 end, { "i", "s" }),
             },
             sources = cmp.config.sources(sources),
-        }
+        })
     end,
 }

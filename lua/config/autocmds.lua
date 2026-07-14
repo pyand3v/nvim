@@ -7,7 +7,7 @@ local function apply_transparency()
     end
 end
 
-local group = vim.api.nvim_create_augroup("SchopenhauerTransparentBackground", { clear = true })
+local group = vim.api.nvim_create_augroup("ConfigTransparentBackground", { clear = true })
 vim.api.nvim_create_autocmd("ColorScheme", {
     group = group,
     callback = apply_transparency,
