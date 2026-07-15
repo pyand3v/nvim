@@ -16,8 +16,11 @@ M.ensure_installed = {
 function M.setup()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    vim.lsp.config("lua_ls", {
+    vim.lsp.config("*", {
         capabilities = capabilities,
+    })
+
+    vim.lsp.config("lua_ls", {
         settings = {
             Lua = {
                 diagnostics = {
@@ -27,13 +30,7 @@ function M.setup()
         },
     })
 
-    vim.lsp.config("ts_ls", {
-        capabilities = capabilities,
-        filetypes = { "javascript", "typescript" },
-    })
-
     vim.lsp.config("emmet_ls", {
-        capabilities = capabilities,
         filetypes = {
             "html",
             "typescriptreact",
@@ -47,7 +44,6 @@ function M.setup()
     })
 
     vim.lsp.config("gopls", {
-        capabilities = capabilities,
         filetypes = { "go", "gomod", "gowork", "gotmpl" },
     })
 end
