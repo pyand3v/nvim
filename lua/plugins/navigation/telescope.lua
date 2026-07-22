@@ -1,7 +1,5 @@
 return {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
-    name = "Telescope",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "andrew-george/telescope-themes",
