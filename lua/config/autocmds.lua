@@ -13,3 +13,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     callback = apply_transparency,
     desc = "Keep colorscheme backgrounds transparent",
 })
+
+-- Refresh buffers when files are changed outside of Neovim.
+local autoread_group = vim.api.nvim_create_augroup("ConfigAutoRead", { clear = true })
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    group = autoread_group,
+    command = "checktime",
+    desc = "Check for external file changes",
+})

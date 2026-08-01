@@ -16,6 +16,7 @@ vim.opt.wrap = false
 -- Persist undo history, but never create swap or backup files.
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.autoread = true
 vim.opt.undodir = vim.fn.stdpath("cache") .. "/undodir"
 vim.opt.undofile = true
 
