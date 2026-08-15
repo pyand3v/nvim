@@ -45,8 +45,18 @@ then
             ["*"] = { "clip.exe" },
         },
         paste = {
-            ["+"] = { "powershell.exe", "-NoProfile", "-Command", "Get-Clipboard -Raw" },
-            ["*"] = { "powershell.exe", "-NoProfile", "-Command", "Get-Clipboard -Raw" },
+            ["+"] = {
+                "powershell.exe",
+                "-NoProfile",
+                "-Command",
+                "[Console]::Out.Write((Get-Clipboard -Raw).Replace(\"`r`n\", \"`n\"))",
+            },
+            ["*"] = {
+                "powershell.exe",
+                "-NoProfile",
+                "-Command",
+                "[Console]::Out.Write((Get-Clipboard -Raw).Replace(\"`r`n\", \"`n\"))",
+            },
         },
         cache_enabled = 0,
     }
