@@ -40,12 +40,13 @@ return {
                 [[        ]] .. header_info .. [[         ]],
             }
 
+            local config_file = vim.fn.fnameescape(vim.fn.stdpath("config") .. "/lua/config/init.lua")
             dashboard.section.buttons.val = {
                 dashboard.button("e", "📝 > New file", ":ene <BAR> startinsert <CR>"),
                 dashboard.button("f", "🧭 > Find file", ":Telescope find_files <CR>"),
                 dashboard.button("r", "⏰ > Recent", ":Telescope oldfiles <CR>"),
                 dashboard.button("t", "🔎 > Find text", ":Telescope live_grep <CR>"),
-                dashboard.button("c", "💡 > Configuration", ":e ~/.config/nvim/lua/config/init.lua<CR>"),
+                dashboard.button("c", "💡 > Configuration", "<cmd>edit " .. config_file .. "<CR>"),
                 dashboard.button("q", "🛟 > Quit Neovim", ":qa<CR>"),
             }
 

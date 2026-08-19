@@ -13,4 +13,26 @@ The configuration keeps normal and floating windows transparent after any colors
 
 ## First launch
 
-Start Neovim normally. lazy.nvim is cloned automatically when it is not installed, then it installs the declared plugins.
+### Requirements
+
+- Neovim 0.11 or later.
+- `git`, used to bootstrap lazy.nvim and install plugins.
+- `make`, used to build Telescope's optional `telescope-fzf-native.nvim` extension.
+- `ripgrep` (`rg`), required by Telescope's live text search.
+- The language runtimes required by the tools you choose to install through Mason. This
+  configuration installs Lua tooling, Prettier, Delve, and the Luau language server;
+  Prettier requires Node.js. Mason reports any additional runtime requirements.
+
+Place this repository at Neovim's standard configuration directory (for example,
+`~/.config/nvim` on Linux and macOS) and start Neovim. On the first launch,
+lazy.nvim is cloned and installs the declared plugins.
+
+`lazy-lock.json` pins the plugin revisions used by this configuration. Run `:Lazy sync`
+after pulling updates to install the locked revisions.
+
+### Network behavior
+
+lazy.nvim checks for plugin updates in the background at startup. Mason also installs
+the configured language servers and tools when Neovim starts. Both operations may use
+the network and can be adjusted in `lua/config/lazy.lua` and
+`lua/plugins/coding/lsp.lua`.
