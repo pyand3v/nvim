@@ -4,7 +4,6 @@ return {
         "nvim-lua/plenary.nvim",
         "andrew-george/telescope-themes",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        "folke/todo-comments.nvim",
     },
     keys = {
         {

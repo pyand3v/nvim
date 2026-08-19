@@ -15,6 +15,10 @@ Telescope is the general discovery tool:
 
 Completion uses `Ctrl+j` and `Ctrl+k` to move through candidates, `Enter` or `Ctrl+y` to confirm, and `Ctrl+q` to close the menu.
 
+Files are formatted on save. Press `<leader>f` to format the current buffer manually.
+
+Use `[t` and `]t` to move between TODO comments. `<leader>st` searches all TODO comments in the project; `<leader>sT` limits that search to TODO, FIX, and FIXME comments.
+
 ## Plugin Maintenance
 
 After plugin changes, run `:Lazy sync`. Use `:checkhealth` to diagnose provider, LSP, or plugin issues. Confirm the configuration starts cleanly with:
