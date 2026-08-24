@@ -1,7 +1,7 @@
 {
   "Completion": { "branch": "main", "commit": "2ffe79f1f021def8dd1fcd81deb16f1bb0d989f3" },
   "Fugitive": { "branch": "master", "commit": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
-  "LspConfig": { "branch": "master", "commit": "221c43884319e791519f0d6c94a7f2fbcd653278" },
+  "LspConfig": { "branch": "master", "commit": "31e3c02ac84f4766383930f46dfabfea4d315cf8" },
   "LuaSnip": { "branch": "master", "commit": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24" },
   "Lualine": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
   "Treesitter": { "branch": "main", "commit": "8b98b4470eb326f1c7b50dae79f8c963568e5720" },
