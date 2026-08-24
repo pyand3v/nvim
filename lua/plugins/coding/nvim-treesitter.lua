@@ -1,6 +1,8 @@
 local languages = {
     "bash",
     "c",
+    "cpp",
+    "css",
     "diff",
     "html",
     "javascript",
@@ -11,8 +13,11 @@ local languages = {
     "markdown_inline",
     "python",
     "regex",
+    "scss",
+    "svelte",
     "toml",
     "typescript",
+    "tsx",
     "vim",
     "vimdoc",
     "yaml",
@@ -23,6 +28,7 @@ local languages = {
     "rust",
     "solidity",
     "dockerfile",
+    "zig",
 }
 
 return {

@@ -17,6 +17,12 @@ return {
     opts = {
         formatters_by_ft = {
             lua = { "stylua" },
+            python = { "ruff_format" },
+            sh = { "shfmt" },
+            bash = { "shfmt" },
+            zsh = { "shfmt" },
+            c = { "clang_format" },
+            cpp = { "clang_format" },
             javascript = { "prettier" },
             javascriptreact = { "prettier" },
             typescript = { "prettier" },
@@ -27,6 +33,8 @@ return {
             html = { "prettier" },
             markdown = { "prettier" },
             yaml = { "prettier" },
+            go = { "goimports" },
+            toml = { "taplo" },
         },
         format_on_save = {
             timeout_ms = 500,

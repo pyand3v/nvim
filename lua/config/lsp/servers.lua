@@ -11,6 +11,15 @@ M.ensure_installed = {
     "rust_analyzer",
     "zls",
     "gopls",
+    "pyright",
+    "ruff",
+    "bashls",
+    "jsonls",
+    "yamlls",
+    "docker_language_server",
+    "taplo",
+    "marksman",
+    "solidity_ls_nomicfoundation",
 }
 
 function M.setup()
