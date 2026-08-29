@@ -31,6 +31,12 @@ local languages = {
     "zig",
 }
 
+-- Go's bundled indenter handles its syntax more reliably than Tree-sitter's
+-- generic indentation query when using the `=` operator.
+local tree_sitter_indent_exclusions = {
+    go = true,
+}
+
 return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
@@ -58,7 +64,9 @@ return {
                 end
 
                 vim.treesitter.start(args.buf, language)
-                vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                if not tree_sitter_indent_exclusions[vim.bo[args.buf].filetype] then
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
                 vim.keymap.set({ "n", "x" }, "<C-space>", function()
                     vim.treesitter.select("parent")
                 end, { buffer = args.buf, desc = "Expand Treesitter selection" })
