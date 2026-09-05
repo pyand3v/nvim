@@ -32,32 +32,13 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
--- WSL may expose a Wayland display even when wl-copy cannot reach its socket.
--- Use the Windows clipboard directly instead of Neovim's auto-detected provider.
+-- Use WSLg's Unicode-aware clipboard bridge instead of clip.exe.
 if (vim.env.WSL_INTEROP or vim.env.WSL_DISTRO_NAME)
-    and vim.fn.executable("clip.exe") == 1
-    and vim.fn.executable("powershell.exe") == 1
+    and vim.env.WAYLAND_DISPLAY ~= ""
+    and vim.fn.executable("wl-copy") == 1
+    and vim.fn.executable("wl-paste") == 1
 then
-    vim.g.clipboard = {
-        name = "WslClipboard",
-        copy = {
-            ["+"] = { "clip.exe" },
-            ["*"] = { "clip.exe" },
-        },
-        paste = {
-            ["+"] = {
-                "powershell.exe",
-                "-NoProfile",
-                "-Command",
-                "[Console]::Out.Write((Get-Clipboard -Raw).Replace(\"`r`n\", \"`n\"))",
-            },
-            ["*"] = {
-                "powershell.exe",
-                "-NoProfile",
-                "-Command",
-                "[Console]::Out.Write((Get-Clipboard -Raw).Replace(\"`r`n\", \"`n\"))",
-            },
-        },
-        cache_enabled = 0,
-    }
+    vim.g.clipboard = "wl-copy"
 end
+
+vim.opt.clipboard = "unnamedplus"
