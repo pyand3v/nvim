@@ -1,0 +1,16 @@
+version: 2
+
+# Plugins are pinned in lazy-lock.json and updated with `:Lazy update`, which Dependabot doesn't support, so it
+# only keeps the workflow actions current.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: chore(ci)
+    groups:
+      github-actions:
+        patterns:
+          - "*"

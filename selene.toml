@@ -1,0 +1,6 @@
+# `vim.yml` adds Neovim's `vim` global on top of Lua 5.1 (LuaJIT)
+std = "vim"
+
+[lints]
+# lazy.nvim specs mix a positional plugin name with keyed options by design
+mixed_table = "allow"

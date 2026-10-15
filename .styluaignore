@@ -1,0 +1,2 @@
+# Rewritten by the Telescope theme picker, which omits the trailing newline
+lua/config/theme.lua

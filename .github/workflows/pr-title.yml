@@ -1,0 +1,28 @@
+name: PR Title
+
+# Enforces Conventional Commits PR titles, e.g. `feat(telescope): add buffer picker` or `chore(deps): update lazy-lock.json`.
+# Squash merges into `main` use the PR title as the commit subject, so this keeps the history consistent.
+# The rule lives in `.github/scripts/check-pr-title.sh`.
+# Re-runs on `edited` so fixing the title replaces the failed result, and on `synchronize` so the check
+# is reported on every new head commit.
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  conventional-title:
+    name: PR Title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # actions/checkout@v7.0.1
+
+      # The title is passed through an env var, never interpolated into the script, since it's user input
+      - name: Check Conventional Commits format
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: .github/scripts/check-pr-title.sh "$TITLE"

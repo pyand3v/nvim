@@ -33,7 +33,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 -- Use WSLg's Unicode-aware clipboard bridge instead of clip.exe.
-if (vim.env.WSL_INTEROP or vim.env.WSL_DISTRO_NAME)
+if
+    (vim.env.WSL_INTEROP or vim.env.WSL_DISTRO_NAME)
     and vim.env.WAYLAND_DISPLAY ~= ""
     and vim.fn.executable("wl-copy") == 1
     and vim.fn.executable("wl-paste") == 1
