@@ -1,9 +1,23 @@
+-- Prefer make (Linux, macOS, MinGW) and fall back to CMake, which uses the
+-- Microsoft C++ Build Tools on Windows. Without either, Telescope keeps its
+-- built-in sorter instead of failing the build on every sync.
+local fzf_build
+if vim.fn.executable("make") == 1 then
+    fzf_build = "make"
+elseif vim.fn.executable("cmake") == 1 then
+    fzf_build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install"
+end
+
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "andrew-george/telescope-themes",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            build = fzf_build,
+            cond = fzf_build ~= nil,
+        },
     },
     keys = {
         {
@@ -60,7 +74,6 @@ return {
     config = function()
         local telescope = require("telescope")
         local actions = require("telescope.actions")
-        telescope.load_extension("fzf")
 
         telescope.setup({
             defaults = {
@@ -158,5 +171,8 @@ return {
                 },
             },
         })
+
+        -- The native sorter is optional; skip it when it was not built.
+        pcall(telescope.load_extension, "fzf")
     end,
 }

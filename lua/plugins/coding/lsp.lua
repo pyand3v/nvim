@@ -46,6 +46,8 @@ return {
                 "gofumpt",
                 "goimports",
                 "shfmt",
+                -- Builds Treesitter parsers on platforms without a packaged CLI.
+                "tree-sitter-cli",
                 -- luau-lsp.nvim manages this server after Mason installs it.
                 "luau-lsp",
             },
