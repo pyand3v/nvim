@@ -18,13 +18,13 @@ local function finish()
     end
 
     if #errors == 0 then
-        io.stdout:write("Startup finished without errors\n")
+        io.write("Startup finished without errors\n")
         vim.cmd("qall!")
         return
     end
 
     for _, message in ipairs(errors) do
-        io.stdout:write(("::error title=Startup error::%s\n"):format(message:gsub("\n", "%%0A")))
+        io.write(("::error title=Startup error::%s\n"):format(message:gsub("\n", "%%0A")))
     end
     vim.cmd("cquit 1")
 end
