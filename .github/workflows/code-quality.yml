@@ -1,0 +1,90 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# A new push to a PR supersedes the checks still running for the previous one
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-format:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # actions/checkout@v7.0.1
+
+      # Reads .stylua.toml and skips the files in .styluaignore
+      - name: Run StyLua check
+        uses: JohnnyMorganz/stylua-action@76fd70c03e6340ceaf673366712db9b20560b402 # JohnnyMorganz/stylua-action@v5.0.0
+        with:
+          token: ${{ github.token }}
+          version: 2.6.0
+          args: --check .
+
+      - name: Install selene
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SELENE_VERSION: 0.32.0
+        run: |
+          gh release download "$SELENE_VERSION" --repo Kampfkarren/selene \
+            --pattern "selene-$SELENE_VERSION-linux.zip" --dir "$RUNNER_TEMP"
+          unzip -q "$RUNNER_TEMP/selene-$SELENE_VERSION-linux.zip" -d "$RUNNER_TEMP/selene"
+          chmod +x "$RUNNER_TEMP/selene/selene"
+          echo "$RUNNER_TEMP/selene" >> "$GITHUB_PATH"
+
+      # Uses selene.toml, with Neovim's `vim` global defined in vim.yml
+      - name: Run selene
+        run: selene --display-style quiet .
+
+  startup:
+    name: Startup (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    # lazy.nvim's bootstrap waits for a key press when its clone fails, which would otherwise hang until the
+    # default six-hour limit
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: nvim
+    # Neovim reads the config from $XDG_CONFIG_HOME/nvim on every platform, so the checkout below is the config.
+    # Plugins and Mason packages go next to it in the workspace instead of the user profile.
+    env:
+      XDG_CONFIG_HOME: ${{ github.workspace }}
+      XDG_DATA_HOME: ${{ github.workspace }}/.xdg/data
+      XDG_STATE_HOME: ${{ github.workspace }}/.xdg/state
+      XDG_CACHE_HOME: ${{ github.workspace }}/.xdg/cache
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # actions/checkout@v7.0.1
+        with:
+          path: nvim
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7 # rhysd/action-setup-vim@v1.6.1
+        with:
+          neovim: true
+          version: stable
+
+      # Installs the revisions pinned in lazy-lock.json, as a fresh clone of this repo would get them
+      - name: Install locked plugins
+        run: nvim --headless "+Lazy! restore" +qa
+
+      # Fails on any error from init.lua or a plugin's setup, including lazy-loaded plugins
+      - name: Check startup
+        run: nvim --headless --cmd "luafile .github/scripts/check-startup.lua" init.lua
