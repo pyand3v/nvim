@@ -5,9 +5,10 @@
 This is a Lua-based Neovim configuration managed with `lazy.nvim`.
 
 - `init.lua` is the startup entry point; it loads core configuration and the saved colorscheme.
-- `lua/schopenhauer/` contains editor-wide behavior: options (`set.lua`), keymaps (`remap.lua`), plugin bootstrap (`lazy.lua`), and shared highlight behavior.
-- `lua/plugins/` contains lazy.nvim specifications, generally one file per feature (for example, `telescope.lua`, `lsp.lua`, or `completion.lua`). Each file must return a plugin spec or list of specs.
-- `lua/colorscheme.lua` stores the active theme and may be updated by the Telescope theme picker.
+- `lua/config/` contains editor-wide behavior: keymaps (`keymaps.lua`), options (`options.lua`), plugin bootstrap (`lazy.lua`), and autocmds such as background transparency (`autocmds.lua`). `init.lua` in this directory fixes their load order.
+- `lua/config/lsp/` holds shared LSP settings: the server list (`servers.lua`), buffer keymaps (`keymaps.lua`), and diagnostics (`diagnostics.lua`).
+- `lua/plugins/` contains lazy.nvim specifications grouped by area (`ui/`, `navigation/`, `editing/`, `coding/`), generally one file per feature (for example, `navigation/telescope.lua` or `coding/completion.lua`). Each file must return a plugin spec or list of specs.
+- `lua/config/theme.lua` stores the active theme and is rewritten by the Telescope theme picker.
 - `lazy-lock.json` pins plugin revisions; update it only when intentionally changing plugin versions.
 
 ## Build, Test, and Development Commands
