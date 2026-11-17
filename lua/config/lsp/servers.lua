@@ -1,27 +1,5 @@
 local M = {}
 
-M.ensure_installed = {
-    "lua_ls",
-    "ts_ls",
-    "html",
-    "cssls",
-    "clangd",
-    "tailwindcss",
-    "emmet_ls",
-    "rust_analyzer",
-    "zls",
-    "gopls",
-    "pyright",
-    "ruff",
-    "bashls",
-    "jsonls",
-    "yamlls",
-    "docker_language_server",
-    "taplo",
-    "marksman",
-    "solidity_ls_nomicfoundation",
-}
-
 function M.setup()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
