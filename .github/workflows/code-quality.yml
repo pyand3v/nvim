@@ -47,6 +47,9 @@ jobs:
       - name: Run selene
         run: selene --display-style quiet .
 
+      - name: Check Ubuntu installer syntax
+        run: bash -n scripts/install.sh scripts/install-config.sh
+
   startup:
     name: Startup (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
