@@ -25,7 +25,8 @@ return {
         require("config.lsp.servers").setup()
 
         require("mason-lspconfig").setup({
-            ensure_installed = require("config.lsp.servers").ensure_installed,
+            -- Tool versions and installation belong to config.tools.
+            ensure_installed = {},
             automatic_enable = {
                 -- luau-lsp.nvim starts and configures its own Luau client.
                 exclude = {
@@ -36,22 +37,18 @@ return {
             },
         })
 
+        local tools = vim.tbl_map(function(tool)
+            return { tool.name, version = tool.version }
+        end, require("config.tools"))
         require("mason-tool-installer").setup({
-            ensure_installed = {
-                "stylua",
-                "selene",
-                "prettier",
-                "clang-format",
-                "delve",
-                "gofumpt",
-                "goimports",
-                "shfmt",
-                -- Builds Treesitter parsers on platforms without a packaged CLI.
-                "tree-sitter-cli",
-                -- luau-lsp.nvim manages this server after Mason installs it.
-                "luau-lsp",
+            ensure_installed = tools,
+            run_on_start = false,
+            auto_update = false,
+            integrations = {
+                ["mason-lspconfig"] = false,
+                ["mason-null-ls"] = false,
+                ["mason-nvim-dap"] = false,
             },
-            run_on_start = true,
         })
     end,
 }
