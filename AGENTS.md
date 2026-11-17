@@ -6,7 +6,9 @@ This is a Lua-based Neovim configuration managed with `lazy.nvim`.
 
 - `init.lua` is the startup entry point; it loads core configuration and the saved colorscheme.
 - `lua/config/` contains editor-wide behavior: keymaps (`keymaps.lua`), options (`options.lua`), plugin bootstrap (`lazy.lua`), and autocmds such as background transparency (`autocmds.lua`). `init.lua` in this directory fixes their load order.
-- `lua/config/lsp/` holds shared LSP settings: the server list (`servers.lua`), buffer keymaps (`keymaps.lua`), and diagnostics (`diagnostics.lua`).
+- `lua/config/lsp/` holds shared LSP settings: server overrides (`servers.lua`), buffer keymaps (`keymaps.lua`), and diagnostics (`diagnostics.lua`).
+- `lua/config/tools.lua` pins Mason packages; `lua/plugins/coding/mason.lua` pins the registry snapshot. Tool installation is explicit, not performed at startup.
+- `scripts/install.sh` provisions Ubuntu prerequisites, restores locked plugins, installs and verifies Mason tools, and checks startup. `docs/` contains setup and daily/language runbooks.
 - `lua/plugins/` contains lazy.nvim specifications grouped by area (`ui/`, `navigation/`, `editing/`, `coding/`), generally one file per feature (for example, `navigation/telescope.lua` or `coding/completion.lua`). Each file must return a plugin spec or list of specs.
 - `lua/config/theme.lua` stores the active theme and is rewritten by the Telescope theme picker.
 - `lazy-lock.json` pins plugin revisions; update it only when intentionally changing plugin versions.
