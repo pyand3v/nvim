@@ -17,7 +17,8 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and center cu
 
 vim.keymap.set("v", "d", '"+d', { desc = "Delete to system clipboard" })
 vim.keymap.set("v", "y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set({ "v", "n" }, "p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set("n", "p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set("v", "p", '"+P', { desc = "Paste from system clipboard without replacing it" })
 
 -- Navigate split windows with Alt+h/j/k/l.
 vim.keymap.set("n", "<A-h>", "<C-w>h", { desc = "Focus left split" })
